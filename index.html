@@ -145,14 +145,13 @@
             height: 17px
         }
 
-        .music.playing svg {
-            animation: spin 4s linear infinite
+        /* волны звука гаснут, когда музыка на паузе */
+        .music .wave {
+            transition: opacity .3s
         }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg)
-            }
+        .music:not(.playing) .wave {
+            opacity: .25
         }
 
         /* ===================== КОНВЕРТ (ЗАСТАВКА) ===================== */
@@ -911,10 +910,12 @@
         <button data-lang="hy" class="active">ՀԱՅ</button>
         <button data-lang="en">ENG</button>
     </div>
-    <button class="music" id="musicBtn" aria-label="Music">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <circle cx="12" cy="12" r="9" />
-            <circle cx="12" cy="12" r="2.5" />
+    <button class="music" id="musicBtn" aria-label="Музыка / звук">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M4 9v6h3.5L13 19V5L7.5 9H4z" />
+            <path class="wave" d="M16 9.2a4 4 0 0 1 0 5.6" />
+            <path class="wave" d="M18.6 6.6a7.5 7.5 0 0 1 0 10.8" />
         </svg>
     </button>
     <audio id="audio" loop preload="none"></audio>
