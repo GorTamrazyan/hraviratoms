@@ -503,10 +503,22 @@
             text-shadow: 0 2px 14px rgba(0, 0, 0, .35)
         }
 
+        html[lang="hy"] .hero-content .names {
+            font-family: "Noto Serif Armenian", serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 46px;
+            letter-spacing: .5px
+        }
+
         .hero-content .amp {
             display: block;
             font-size: 40px;
             margin: 2px 0
+        }
+
+        html[lang="hy"] .hero-content .amp {
+            font-size: 30px
         }
 
         .hero-date {
@@ -945,16 +957,10 @@
             <div class="hero-bg" id="heroBg"></div>
             <div class="hero-content">
                 <div class="caps" style="color:#fff;opacity:.9;margin-bottom:16px" data-i18n="married"></div>
-                <div class="names"><span id="groom1"></span><span class="amp">&amp;</span><span id="bride1"></span>
+                <div class="names"><span id="groom1"></span><span class="amp" id="amp1">&amp;</span><span id="bride1"></span>
                 </div>
                 <div class="hero-date" id="heroDate"></div>
-                <div class="monogram">
-                    <svg viewBox="0 0 110 110" fill="none" stroke="#fff" stroke-width="1.2" opacity=".9">
-                        <circle cx="55" cy="55" r="44" stroke-dasharray="2 5" />
-                        <g id="wreath"></g>
-                    </svg>
-                    <span id="mono"></span>
-                </div>
+               
             </div>
         </section>
 
@@ -1137,9 +1143,9 @@
             document.querySelectorAll(".lang button").forEach(b => b.classList.toggle("active", b.dataset.lang === lang));
 
             $("#envNames").textContent = `${CONFIG.groom[lang]} ${lang === "hy" ? "և" : "&"} ${CONFIG.bride[lang]}`;
-            $("#groom1").textContent = CONFIG.groom.en;
-            $("#bride1").textContent = CONFIG.bride.en;
-            $("#mono").textContent = CONFIG.groom.en[0] + CONFIG.bride.en[0];
+            $("#groom1").textContent = CONFIG.groom[lang];
+            $("#bride1").textContent = CONFIG.bride[lang];
+            $("#amp1").textContent = lang === "hy" ? "և" : "&";
             $("#envMono").textContent = CONFIG.groom.en[0] + CONFIG.bride.en[0];
             $("#finalNames").textContent = `${CONFIG.groom[lang]} ${lang === "hy" ? "և" : "&"} ${CONFIG.bride[lang]}`;
 
@@ -1176,18 +1182,6 @@
     </div>`).join("");
         }
 
-        // венок монограммы
-        (function () {
-            let g = "";
-            for (let i = 0; i < 28; i++) {
-                const a = i / 28 * Math.PI * 2, r = 44;
-                const x = 55 + Math.cos(a) * r, y = 55 + Math.sin(a) * r;
-                const deg = a * 180 / Math.PI + 90;
-                g += `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="2.2" ry="5" transform="rotate(${deg.toFixed(0)} ${x.toFixed(1)} ${y.toFixed(1)})" fill="rgba(255,255,255,.5)" stroke="none"/>`;
-            }
-            $("#wreath").innerHTML = g;
-        })();
-
         // рваные края
         document.querySelectorAll(".torn").forEach(el => {
             let d = "M0 12 ";
@@ -1202,7 +1196,7 @@
         bg($("#band1"), CONFIG.photos.band1);
         bg($("#band2"), CONFIG.photos.band2);
 
-        // дресс-код
+        
        
         // обратный отсчёт
         function tick() {
