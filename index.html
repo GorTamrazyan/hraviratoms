@@ -1049,8 +1049,7 @@
                     title: { hy: "Եկեղեցի", en: "Church" },
                     name: { hy: "Սբ. Մեսրոպ Մաշտոց", en: "St. Mesrop Mashtots" },
                     address: { hy: "", en: "" },
-                    photo: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=900&q=80",
-                    map: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Սուրբ Մեսրոպ Մաշտոց եկեղեցի")
+                    photo: "img5.jpg",
                 },
                 {
                     time: "15:00",
@@ -1058,15 +1057,14 @@
                     name: { hy: "", en: "" },
                     address: { hy: "", en: "" },
                     photo: "",
-                    map: ""
                 },
                 {
                     time: "17:00",
                     title: { hy: "Ռեստորան", en: "Restaurant" },
                     name: { hy: "Զանգակ", en: "Zangak" },
                     address: { hy: "", en: "" },
-                    photo: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=900&q=80",
-                    map: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Zangak restaurant")
+                    photo: "img4.jpg",
+                   
                 }
             ],
 
@@ -1105,6 +1103,7 @@
 
         /* ========================================================= */
         const $ = s => document.querySelector(s);
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual";  // не восстанавливать прокрутку при перезагрузке
         const eventDate = new Date(CONFIG.date);
         let lang = "hy";
 
@@ -1219,6 +1218,7 @@
             if (env.classList.contains("open")) return;
             env.classList.add("open");                         // печать нажата → заставка плавно уходит
             document.body.classList.remove("locked");
+            window.scrollTo({ top: 0, left: 0, behavior: "instant" });   // страница всегда с самого верха
             setTimeout(() => env.style.display = "none", 1300);
             if (CONFIG.music) {
                 musicBtn.classList.add("show");
